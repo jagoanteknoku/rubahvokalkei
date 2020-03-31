@@ -26,14 +26,26 @@
 
 		<div class="row justify-content-center">
 			<div class="col-12 text-center" id="hilihkintil">
+				<form id="myForm">
 					<div class="form-group">
 	    				<label for="xinput" id="labelxinput"> Kata Awal : </label>
 					    <textarea class="form-control" rows="10%" id="xinput"></textarea>
 				  	</div>
+					<div class="radio-button">
+						<div class="custom-control custom-radio">
+							<input type="radio" id="Arnold" name="formatAccent" class="custom-control-input" value="arnold" checked>
+							<label class="custom-control-label" for="Arnold">Chef Arnold ( rubah vocal ke i ) </label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="Juna" name="formatAccent" class="custom-control-input" value="juna">
+							<label class="custom-control-label" for="Juna">Chef Juna ( rubah vocal ke i ) </label>
+						</div>
+					</div><br>
 				  	<div class="form-group">
-				  		<label for="xoutput" id="labelxoutput"> Vocal I : </label>
+				  		<label for="xoutput" id="labelxoutput"> Hasil : </label>
 					    <textarea class="form-control" rows="10%" id="xoutput"></textarea>
 				  	</div>
+				  </form>
 			</div>
 		</div>
 	</div>
@@ -44,27 +56,25 @@
 	$(document).ready(function(){
 		var data
 		var result
+		var who = $('input[name=formatAccent]:checked', '#myForm').val()
+
+		$('#myForm input').on('change', function() {
+		   who = $('input[name=formatAccent]:checked', '#myForm').val()
+		    if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal('u'))  } else { $('textarea#xoutput').text($.fn.gantivocal('i')) }
+		});
+
 		$("textarea#xinput").keyup(function(){
-		  data = $('textarea#xinput').val()
-		  result = data.replace(/a|u|e|o/g, 'i');
-		  result = result.replace(/ii/g, 'yi')
-		  $('textarea#xoutput').text(result)
+		  if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal('u'))  } else { $('textarea#xoutput').text($.fn.gantivocal('i')) }
 		});
 
-		/*$("textarea#xoutput").click(function(){
-			  var $temp = $("textarea#xoutput");
-			  $("body").append($temp);
-			  $temp.val($("#xoutput").text()).select();
-			  document.execCommand("copy");
-			  $temp.remove();
-		});
+		$.fn.gantivocal = function($isi) {
+			data = $('textarea#xinput').val()
+		  	var rresult = data.replace(/a|u|e|o/g, $isi)
+		  	rresult = rresult.replace(/ii/g, $isi)
+	    	return rresult;
+		}
 
-		$('#switch').click(function(){
-			$("textarea#xinput").attr('id', 'xoutput'); 
-			$("textarea#xoutput").attr('id', 'xinput'); 
-		});*/
 	});
-
 	
 </script>
 </body>
