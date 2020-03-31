@@ -19,7 +19,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Rubah semua Vokal menjadi " i "</a>
+            <a class="navbar-brand" href="#">Rubah Vocal </a>
           </div>
         </div><!--/.container-fluid -->
       </nav>
@@ -40,6 +40,11 @@
 							<input type="radio" id="Juna" name="formatAccent" class="custom-control-input" value="juna">
 							<label class="custom-control-label" for="Juna">Chef Juna ( rubah vocal ke i ) </label>
 						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="custom" name="formatAccent" class="custom-control-input" value="custom">
+							<label class="custom-control-label" for="custom"> Custom Vocal </label>
+						</div>
+						<input type="text" id="customiput" value="o">
 					</div><br>
 				  	<div class="form-group">
 				  		<label for="xoutput" id="labelxoutput"> Hasil : </label>
@@ -60,16 +65,20 @@
 
 		$('#myForm input').on('change', function() {
 		   who = $('input[name=formatAccent]:checked', '#myForm').val()
-		    if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal('u'))  } else { $('textarea#xoutput').text($.fn.gantivocal('i')) }
+		  if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal($('textarea#xinput').val(), 'u'))  } else if (who=="arnold"){ $('textarea#xoutput').text($.fn.gantivocal($('textarea#xinput').val() ,'i')) } else {$('textarea#xoutput').text($.fn.gantivocal( $('textarea#xinput').val() ,$('input#customiput').val() ))}
 		});
 
 		$("textarea#xinput").keyup(function(){
-		  if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal('u'))  } else { $('textarea#xoutput').text($.fn.gantivocal('i')) }
+		  if(who=="juna"){ $('textarea#xoutput').text($.fn.gantivocal($('textarea#xinput').val(), 'u'))  } else if (who=="arnold"){ $('textarea#xoutput').text($.fn.gantivocal($('textarea#xinput').val() ,'i')) } else {$('textarea#xoutput').text($.fn.gantivocal( $('textarea#xinput').val() ,$('input#customiput').val() ))}
 		});
 
-		$.fn.gantivocal = function($isi) {
-			data = $('textarea#xinput').val()
-		  	var rresult = data.replace(/a|u|e|o/g, $isi)
+		$("input#customiput").keyup(function(){
+			$('textarea#xoutput').text($.fn.gantivocal( $('textarea#xinput').val() ,$('input#customiput').val() ))
+		})
+
+		$.fn.gantivocal = function($data, $isi) {
+			var ddata = $data
+		  	var rresult = ddata.replace(/a|u|e|o/g, $isi)
 		  	rresult = rresult.replace(/ii/g, $isi)
 	    	return rresult;
 		}
