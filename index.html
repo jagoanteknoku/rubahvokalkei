@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>~~ Otonge ~~</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Rubah semua Vokal menjadi " i "</a>
+          </div>
+        </div><!--/.container-fluid -->
+      </nav>
+
+		<div class="row justify-content-center">
+			<div class="col-12 text-center" id="hilihkintil">
+					<div class="form-group">
+	    				<label for="xinput" id="labelxinput"> Kata Awal : </label>
+					    <textarea class="form-control" rows="10%" id="xinput"></textarea>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="xoutput" id="labelxoutput"> Vocal I : </label>
+					    <textarea class="form-control" rows="10%" id="xoutput"></textarea>
+				  	</div>
+			</div>
+		</div>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		var data
+		var result
+		$("textarea#xinput").keyup(function(){
+		  data = $('textarea#xinput').val()
+		  result = data.replace(/a|u|e|o/g, 'i');
+		  result = result.replace(/ii/g, 'yi')
+		  $('textarea#xoutput').text(result)
+		});
+
+		/*$("textarea#xoutput").click(function(){
+			  var $temp = $("textarea#xoutput");
+			  $("body").append($temp);
+			  $temp.val($("#xoutput").text()).select();
+			  document.execCommand("copy");
+			  $temp.remove();
+		});
+
+		$('#switch').click(function(){
+			$("textarea#xinput").attr('id', 'xoutput'); 
+			$("textarea#xoutput").attr('id', 'xinput'); 
+		});*/
+	});
+
+	
+</script>
+</body>
+</html>
